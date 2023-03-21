@@ -1,4 +1,5 @@
 const { productsModel } = require('../models');
+// const validation = require('../validations/joi.schemas');
 
 const getAll = async () => {
   const products = await productsModel.getAll();
@@ -15,13 +16,11 @@ const getById = async (id) => {
 };
 
 const newProduct = async (productData) => {
-  // const error = validation.validateProduct(productData);
-  // if(error) return error;
+  // const { error } = validation.validateNewProduct.validate({ name: productData });
+  // if (error) return { type: 'INVALID_VALUES', message: error.message };
 
   const productID = await productsModel.newProduct(productData);
   const productObj = await productsModel.getById(productID);
-  
-  // if (!product) return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
   
   return { type: null, message: productObj };
 };

@@ -22,12 +22,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-03-21T21:11:14.067Z",
-    "modified": "2023-03-21T22:44:36.318Z",
+    "modified": "2023-03-21T23:27:25.393Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Producdcdcc\"\n}",
+      "raw": "{\n  \"name\": \"TR\"\n}",
       "form": []
     },
     "tests": []

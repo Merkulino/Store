@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
-const { productsMockData } = require('../mocks/products.model.mock');
+const { productsMockData } = require('../mocks/products.mock');
 
 describe('Product Service Test', () => {
   it('Get the right values from db', async () => {

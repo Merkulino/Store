@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "getAll Products",
-    "url": "localhost:3001/products/999",
+    "url": "localhost:3001/products/1",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-03-21T19:31:00.376Z",
-    "modified": "2023-03-21T19:45:44.241Z",
+    "modified": "2023-03-21T22:37:20.998Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -22,12 +22,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-03-21T21:11:14.067Z",
-    "modified": "2023-03-21T22:07:10.863Z",
+    "modified": "2023-03-21T22:44:36.318Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Prod\"\n}",
+      "raw": "{\n  \"name\": \"Producdcdcc\"\n}",
       "form": []
     },
     "tests": []

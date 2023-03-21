@@ -9,6 +9,16 @@ productsMockData = [
   }
 ]
 
+responseDBMock = [{
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 2,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0
+}];
+
 module.exports = {
   productsMockData,
+  responseDBMock,
 };

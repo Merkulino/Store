@@ -31,6 +31,19 @@ describe('Product Service Test', () => {
     expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
     expect(result.message).to.be.equal('Product not found');
   });
+
+  it('get obj data from db when add new product', async () => {
+    const mockObj = { id: 2, name: 'productName' };
+ 
+    sinon.stub(productsModel, 'newProduct').resolves(2);
+    sinon.stub(productsModel, 'getById').resolves(mockObj);
+
+    const result = await productsService.newProduct(mockObj);
+
+    expect(result.type).to.be.null;
+    expect(result.message).to.be.equal(mockObj);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

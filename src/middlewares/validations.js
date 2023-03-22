@@ -10,6 +10,16 @@ const newProduct = (req, res, next) => {
   next();
 };
 
+const newSale = (req, res, next) => {
+  const products = req.body;
+  products.forEach(({ productId, quantity }) => { // Acho que pode dar error de Type caso não tenha essas chaves
+    if (!productId) next({ status: 400, message: '"productId" is required' });
+    if (quantity === undefined) next({ status: 400, message: '"quantity" is required' });
+  }); 
+  next();
+};
+
 module.exports = {
   newProduct,
+  newSale,
 };

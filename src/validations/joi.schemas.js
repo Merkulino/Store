@@ -7,6 +7,12 @@ const validateNewProduct = Joi.object({
   'string.min': '"name" length must be at least 5 characters long',
 });
 
+const validNewSale = Joi.array().items(Joi.object({
+  productId: Joi.number().required(),
+  quantity: Joi.number().min(1).required(),
+}));
+
 module.exports = {
   validateNewProduct,
+  validNewSale,
 };

@@ -7,7 +7,7 @@ const newSale = async (sale) => {
     const newSalesProducts = sale.map(async ({ productId, quantity }) => {
       await db.execute(
         `INSERT INTO sales_products (sale_id, product_id, quantity) VALUES
-    (?, ?, ?)`,
+        (?, ?, ?)`,
         [insertId, productId, quantity],
       );
     });
@@ -26,7 +26,7 @@ const getAll = async () => {
   INNER JOIN sales_products AS sp 
   ON s.id = sp.sale_id
   ORDER BY sale_id ASC, product_id;`);
-  
+
   const salesNormalized = sales.map((sale) => ({ // Refactor -> Camelize
     saleId: sale.sale_id,
     date: sale.date,

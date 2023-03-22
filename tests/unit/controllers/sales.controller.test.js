@@ -4,7 +4,11 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const { salesService } = require('../../../src/services');
 const { salesController } = require('../../../src/controllers');
-const { newSalesMock, resProductSaledMock, newInvalidSaleMock } = require('../mocks/sales.mock');
+const { newSalesMock,
+        resProductSaledMock,
+        newInvalidSaleMock,
+        resAllSalesMock,
+        resSaleMockByID } = require('../mocks/sales.mock');
 chai.use(sinonChai);
 
 describe('Sale Controller Test', () => {
@@ -39,6 +43,57 @@ describe('Sale Controller Test', () => {
     expect(res.status).to.have.been.calledWith(422);
     expect(res.json).to.have.been.calledWith({ message: '"quantity" must be greater than or equal to 1' });
   });
+
+  it('return all sales of db', async () => {
+    const res = {};
+    const req = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(salesService, 'getAll').resolves({ type: null, message: resAllSalesMock });
+
+    await salesController.listSales(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(resAllSalesMock);
+  });
+  
+  it('return sale of db using id', async () => {
+    const res = {};
+    const req = {
+      params: {
+        id: 1
+      }
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(salesService, 'getById').resolves({ type: null, message: resSaleMockByID });
+
+    await salesController.findSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(resSaleMockByID);
+  });
+  
+  it('return a error when sale id not exist on db', async () => {
+    const res = {};
+    const req = {
+      params: {
+        id: 666
+      }
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(salesService, 'getById').resolves({ type: 'NOT_FOUND', message: 'Sale not found' });
+
+    await salesController.findSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Sale not found'});
+  });
+
   afterEach(() => {
     sinon.restore();
   });

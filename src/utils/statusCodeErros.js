@@ -1,6 +1,6 @@
 const errorsObj = {
   DATABASE_ERROR: 500,
-  PRODUCT_NOT_FOUND: 404,
+  NOT_FOUND: 404,
   INVALID_INPUT: 422,
 };
 

@@ -23,7 +23,7 @@ const validateProducts = async (sales) => {
   const validProd = await Promise.all(validProductsOnDB);
 
   if (validProd.some(({ type }) => type)) {
-    return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+    return { type: 'NOT_FOUND', message: 'Product not found' };
   }
 
   return { type: null };

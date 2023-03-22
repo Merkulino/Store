@@ -23,8 +23,23 @@ const resProductSaledMock = {
   ]
 }
 
+const newInvalidSaleMock = [
+  {
+    productId: 1,
+    quantity: -404
+  },
+];
+
+responseDBMock = [{
+  fieldCount: 0,
+  affectedRows: 2,
+  insertId: 3,
+  serverStatus: 2,
+}];
 
 module.exports = {
   newSalesMock,
   resProductSaledMock,
+  newInvalidSaleMock,
+  responseDBMock,
 };

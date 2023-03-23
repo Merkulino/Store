@@ -98,18 +98,21 @@ describe('Sale Controller Test', () => {
     // const res = {};
     // const req = {
     //   params: {
-    //     // id: 1
-    //   }
+    //     id: 1,
+    //   },
+    //   body: {
+    //     name: 'Traje de crescimento',
+    //   },
     // };
     // res.status = sinon.stub().returns(res);
     // res.json = sinon.stub().returns();
 
-    // sinon.stub(salesService, 'getById').resolves({ type: 'NOT_FOUND', message: 'Sale not found' });
+    // sinon.stub(productsService, 'updateProduct').resolves({ type: null, message: updateResponseMock });
 
-    // await salesController.findSale(req, res);
+    // await productsController.updateProduct(req, res);
 
-    // expect(res.status).to.have.been.calledWith(404);
-    // expect(res.json).to.have.been.calledWith({ message: 'Sale not found'});
+    // expect(res.status).to.have.been.calledWith(200);
+    // expect(res.json).to.have.been.calledWith(updateResponseMock);
   });
 
   afterEach(() => {

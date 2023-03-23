@@ -1,4 +1,5 @@
 const { productsService } = require('../services');
+const { setError } = require('../utils/statusCodeErros');
 
 const getAll = async (req, res) => {
   const { type, message } = await productsService.getAll();
@@ -20,8 +21,17 @@ const newProduct = async (req, res) => {
   res.status(201).json(message);
 };
 
+const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const product = req.body;
+  const { type, message } = await productsService.updateProduct(id, product);
+  if (type) return res.status(setError(type)).json({ message });
+  return res.status(200).json(message);
+};
+
 module.exports = {
   getAll,
   getById,
   newProduct,
+  updateProduct,
 };

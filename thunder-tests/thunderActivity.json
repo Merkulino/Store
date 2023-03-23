@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "getAll Products",
-    "url": "localhost:3001/products/1",
+    "url": "localhost:3001/products/",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-03-21T19:31:00.376Z",
-    "modified": "2023-03-21T22:37:20.998Z",
+    "modified": "2023-03-23T18:42:13.991Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -63,6 +63,25 @@
     "modified": "2023-03-22T22:08:53.768Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "20c2b2b2-d571-4c0e-9398-c0d8483b6818",
+    "colId": "history",
+    "containerId": "",
+    "name": "updatePRod",
+    "url": "localhost:3001/products/3",
+    "method": "PATCH",
+    "sortNum": 0,
+    "created": "2023-03-23T18:42:46.748Z",
+    "modified": "2023-03-23T19:23:30.678Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"silvio santos\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

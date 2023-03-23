@@ -42,6 +42,24 @@ describe('Sales Service Test', () => {
     expect(result.message).to.be.equal('Sale not found');
   });
 
+  // it('return sale updated from model', async () => {
+  //   // sinon.stub(productsModel, 'updateProduct').resolves(updateResponseMock);
+
+  //   // const result = await productsService.updateProduct(1, { name: "Traje de crescimento" });
+
+  //   // expect(result.type).to.be.null;
+  //   // expect(result.message).to.be.equal(updateResponseMock);
+  // });
+
+  // it('return a error when id is invalid', async () => {
+  //   // sinon.stub(productsModel, 'updateProduct').resolves(undefined);
+
+  //   // const result = await productsService.updateProduct(420, { name: "OBJETO DE ERRO" });
+
+  //   // expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
+  //   // expect(result.message).to.be.equal('Product not found');
+  // });
+
   afterEach(() => {
     sinon.restore();
   });

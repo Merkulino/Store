@@ -21,8 +21,19 @@ const newProduct = async (productData) => {
   return insertId;
 };
 
+const updateProduct = async (id, { name }) => {
+  await db.execute(`
+    UPDATE products
+    SET name = ?
+    WHERE id = ?`, [name, id]);
+  const [[{ name: nome }]] = await db.execute(`
+  SELECT name FROM products WHERE id = ?`, [id]);
+  return { id, name: nome };
+};
+
 module.exports = {
   getAll,
   getById,
   newProduct,
+  updateProduct,
 };

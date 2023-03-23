@@ -1,4 +1,5 @@
 const { productsModel } = require('../models');
+const { verifyProductOnDB } = require('../validations/validate.products');
 // const validation = require('../validations/joi.schemas');
 
 const getAll = async () => {
@@ -25,8 +26,17 @@ const newProduct = async (productData) => {
   return { type: null, message: productObj };
 };
 
+const updateProduct = async (id, product) => {
+  const error = await verifyProductOnDB(id);
+  if (error.type) return { type: error.type, message: error.message };
+  const productUpdated = await productsModel.updateProduct(id, product);
+  if (!productUpdated) return { type: 'SERVER_ERROR', message: productUpdated };
+  return { type: null, message: productUpdated };
+};
+
 module.exports = {
   getAll,
   getById,
   newProduct,
+  updateProduct,
 };

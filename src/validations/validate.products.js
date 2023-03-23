@@ -1,10 +1,6 @@
 const { productsModel } = require('../models');
 const schema = require('./joi.schemas');
 
-// const validateProduct = (prod) => {
-//   // Ignorei talvez n use
-// };
-
 const validateSaleQuantity = (sales) => {
   const { error } = schema.validNewSale.validate(sales);
   if (error) {
@@ -13,12 +9,14 @@ const validateSaleQuantity = (sales) => {
   return { type: null, message: '' };
 };
 
+const verifyProductOnDB = async (productId) => {
+  const product = await productsModel.getById(productId);
+  if (!product) return { type: 'NOT_FOUND', message: 'Product not found' };
+  return { type: null };
+};
+
 const validateProducts = async (sales) => {
-  const validProductsOnDB = sales.map(async ({ productId }) => {
-    const product = await productsModel.getById(productId);
-    if (!product) return { type: 'PRODUCT_NOT_FOUND' };
-    return { type: null };
-  });
+  const validProductsOnDB = sales.map(async ({ productId }) => verifyProductOnDB(productId));
 
   const validProd = await Promise.all(validProductsOnDB);
 
@@ -32,4 +30,5 @@ const validateProducts = async (sales) => {
 module.exports = {
   validateSaleQuantity,
   validateProducts,
+  verifyProductOnDB,
 };

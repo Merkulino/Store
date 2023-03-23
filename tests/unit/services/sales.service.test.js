@@ -61,18 +61,18 @@ describe('Sales Service Test', () => {
   // });
 
   // it('delete sale', async () => {
-  //   sinon.stub(salesModel, 'delete').resolves('ok');
+    // sinon.stub(salesModel, 'deleteProduct').resolves('ok');
 
-  //   const result = await salesService.delete(1);
+    // const result = await salesService.deleteProduct(1);
 
   //   expect(result.type).to.be.null;
   //   expect(result.message).to.be.equal('ok');
   // });
   
   // it('delete sale', async () => {
-  //   sinon.stub(salesModel, 'delete').resolves('ok');
+    // sinon.stub(salesModel, 'deleteProduct').resolves('ok');
 
-  //   const result = await salesService.delete(123);
+    // const result = await salesService.deleteProduct(123);
 
   //   expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
   //   expect(result.message).to.be.equal('Product not found');

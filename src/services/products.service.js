@@ -34,9 +34,18 @@ const updateProduct = async (id, product) => {
   return { type: null, message: productUpdated };
 };
 
+const deleteProduct = async (id) => {
+  const error = await verifyProductOnDB(id);
+  if (error.type) return { type: error.type, message: error.message };
+  const productDeleted = await productsModel.deleteProduct(id);
+  if (!productDeleted) return { type: 'SERVER_ERROR', message: productDeleted };
+  return { type: null, message: 'ok' };
+};
+
 module.exports = {
   getAll,
   getById,
   newProduct,
   updateProduct,
+  deleteProduct,
 };

@@ -7,7 +7,7 @@ const { productsService } = require("../../../src/services");
 const { productsController } = require('../../../src/controllers');
 const { productsMockData, updateResponseMock } = require('../mocks/products.mock');
 
-describe('Product Controller Test', () => {
+describe('Product Controller Test', async () => {
   it('return product obj from id', async () => {
     const res = {};
     const req = {
@@ -129,9 +129,9 @@ describe('Product Controller Test', () => {
   //   res.status = sinon.stub().returns(res);
   //   res.json = sinon.stub().returns();
 
-  //   sinon.stub(productsService, 'delete').resolves('ok');
+    // sinon.stub(productsService, 'deleteProduct').resolves('ok');
 
-  //   await productsController.delete(req, res);
+    // await productsController.deleteProduct(req, res);
 
   //   expect(res.status).to.have.been.calledWith(204);
   // });
@@ -146,9 +146,9 @@ describe('Product Controller Test', () => {
   //   res.status = sinon.stub().returns(res);
   //   res.json = sinon.stub().returns();
 
-  //   sinon.stub(productsService, 'delete').resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+    // sinon.stub(productsService, 'deleteProduct').resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
 
-  //   await productsController.delete(req, res);
+    // await productsController.deleteProduct(req, res);
 
   //   expect(res.status).to.have.been.calledWith(404);
   //   expect(res.json).to.have.been.calledWith({ message: 'Product not found' });

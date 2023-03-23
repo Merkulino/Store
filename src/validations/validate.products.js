@@ -1,4 +1,4 @@
-const { productsModel } = require('../models');
+const { productsModel, salesModel } = require('../models');
 const schema = require('./joi.schemas');
 
 const validateSaleQuantity = (sales) => {
@@ -27,8 +27,15 @@ const validateProducts = async (sales) => {
   return { type: null };
 };
 
+const validSaleOnDB = async (saleID) => {
+  const hasSale = await salesModel.getById(saleID); 
+  if (!hasSale || !hasSale.length) return { type: 'NOT_FOUND', message: 'Sale not found' };
+  return { type: null };
+};
+
 module.exports = {
   validateSaleQuantity,
   validateProducts,
   verifyProductOnDB,
+  validSaleOnDB,
 };

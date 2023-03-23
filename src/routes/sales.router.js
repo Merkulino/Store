@@ -16,7 +16,8 @@ router.post('/',
   validation.newSale,
   salesController.newSale);
 
-// router.put('/:id',
-//   salesController.updateSale);
+router.put('/:id',
+  validation.newSale,
+  salesController.updateSale);
 
 module.exports = router;

@@ -41,12 +41,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-03-22T18:30:25.656Z",
-    "modified": "2023-03-22T20:48:58.349Z",
+    "modified": "2023-03-23T20:35:56.985Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[\n  {\n    \"productId\": 25,\n    \"quantity\": 55\n  },\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  }\n]",
+      "raw": "[\n  {\n    \"productId\": 2,\n    \"quantity\": 99\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 12\n  }\n]",
       "form": []
     },
     "tests": []
@@ -56,11 +56,11 @@
     "colId": "history",
     "containerId": "",
     "name": "allSAles",
-    "url": "localhost:3001/sales/2",
+    "url": "localhost:3001/sales/1",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-03-22T21:50:02.492Z",
-    "modified": "2023-03-22T22:08:53.768Z",
+    "modified": "2023-03-23T21:05:53.533Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -80,6 +80,25 @@
     "body": {
       "type": "json",
       "raw": "{\n  \"name\": \"silvio santos\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "585c1b3e-a4dd-423a-9812-01bfca514a2f",
+    "colId": "history",
+    "containerId": "",
+    "name": "updateSale",
+    "url": "localhost:3001/sales/3",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-03-23T20:13:34.971Z",
+    "modified": "2023-03-23T21:02:25.254Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 8\n  },\n  {\n    \"productId\": 1,\n    \"quantity\": 5\n  }\n]",
       "form": []
     },
     "tests": []

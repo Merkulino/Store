@@ -55,8 +55,21 @@ const getById = async (id) => {
   return salesNormalized;
 };
 
+const updateSale = async (id, sale) => {
+  const currentSale = await getById(id);
+  const updateSales = sale.map(async ({ productId, quantity }, index) => {
+    await db.execute(`
+    UPDATE sales_products
+    SET product_id = ?, quantity = ?
+    WHERE sale_id = ? AND quantity = ?;`, [productId, quantity, id, currentSale[index].quantity]);
+  });
+  await Promise.all(updateSales);
+  return { saleId: id, itemsUpdated: sale };
+};
+
 module.exports = {
   newSale,
   getAll,
   getById,
+  updateSale,
 };

@@ -1,5 +1,7 @@
 const { salesModel } = require('../models');
-const { validateSaleQuantity, validateProducts } = require('../validations/validate.products');
+const { validateSaleQuantity,
+        validateProducts,
+        validSaleOnDB } = require('../validations/validate.products');
 
 const newSale = async (sales) => {
   const error = validateSaleQuantity(sales);
@@ -28,8 +30,25 @@ const getById = async (id) => {
   return { type: null, message: sale };
 };
 
+const updateSale = async (id, sale) => {
+  const error = validateSaleQuantity(sale);
+  if (error.type) return error;
+
+  const notHaveProductOnDB = await validateProducts(sale);
+  if (notHaveProductOnDB.type) return notHaveProductOnDB;
+
+  const notHaveSaleOnDB = await validSaleOnDB(id);
+  console.log(notHaveSaleOnDB);
+  if (notHaveSaleOnDB.type) return notHaveSaleOnDB;
+
+  const saleUpdated = await salesModel.updateSale(id, sale);
+  if (!saleUpdated) return { type: 'SERVER_ERROR', message: saleUpdated };
+  return { type: null, message: saleUpdated };
+};
+
 module.exports = {
   newSale,
   getAll,
   getById,
+  updateSale,
 };

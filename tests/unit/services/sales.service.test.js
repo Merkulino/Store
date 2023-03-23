@@ -3,7 +3,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
-const { newSalesMock, resProductSaledMock, resAllSalesMock, resSaleMockByID } = require('../mocks/sales.mock');
+const { newSalesMock, resProductSaledMock, resAllSalesMock, resSaleMockByID, resUpdateSaleMock } = require('../mocks/sales.mock');
 
 describe('Sales Service Test', () => {
   it('add new sale or sales', async () => {
@@ -42,22 +42,22 @@ describe('Sales Service Test', () => {
     expect(result.message).to.be.equal('Sale not found');
   });
 
-  // it('return sale updated from model', async () => {
-  //   // sinon.stub(productsModel, 'updateProduct').resolves(updateResponseMock);
+  it('return sale updated from model', async () => {
+    sinon.stub(salesModel, 'updateSale').resolves(resUpdateSaleMock);
 
-  //   // const result = await productsService.updateProduct(1, { name: "Traje de crescimento" });
+    const result = await salesService.updateSale(1, newSalesMock);
 
-  //   // expect(result.type).to.be.null;
-  //   // expect(result.message).to.be.equal(updateResponseMock);
-  // });
+    expect(result.type).to.be.null;
+    expect(result.message).to.be.equal(resUpdateSaleMock);
+  });
 
-  // it('return a error when id is invalid', async () => {
-  //   // sinon.stub(productsModel, 'updateProduct').resolves(undefined);
+  // it.only('return a error when id is invalid', async () => {
+  //   sinon.stub(salesModel, 'updateSale').resolves(undefined);
 
-  //   // const result = await productsService.updateProduct(420, { name: "OBJETO DE ERRO" });
+  //   const result = await salesService.updateProduct(420, { name: "OBJETO DE ERRO" });
 
-  //   // expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
-  //   // expect(result.message).to.be.equal('Product not found');
+  //   expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
+  //   expect(result.message).to.be.equal('Product not found');
   // });
 
   afterEach(() => {

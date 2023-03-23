@@ -10,7 +10,8 @@ const {
   resAllSalesMock,
   resAllSalesMockNonNormalized,
   resSaleMockByIdNonNormalized,
-  resSaleMockByID} = require('../mocks/sales.mock');
+  resSaleMockByID,
+  resUpdateSaleMock} = require('../mocks/sales.mock');
 
 describe('Sales Model Test', () => {
   it('add new sale or sales', async () => {
@@ -35,13 +36,14 @@ describe('Sales Model Test', () => {
     expect(result).to.deep.equal(resSaleMockByID);
   });
 
-  // it('return product updated from db', async () => {
-  //   // sinon.stub(connection, 'execute').resolves(updateResponseMock);
+  it('return sale updated from db', async () => {
+    sinon.stub(salesModel, 'getById').resolves(newSalesMock)
+    sinon.stub(connection, 'execute').resolves(responseDBMock);
+    console.log(newSalesMock);
+    // const result = await salesModel.updateSale(1, newSalesMock); -> sales.map not a func. Parece q stub n funciona
 
-  //   // const result = await productsModel.updateProduct(1, { name: 'Traje de crescimento' });
-
-  //   // expect(result).to.deep.equal(updateResponseMock);
-  // });
+    // expect(result).to.deep.equal(resUpdateSaleMock);
+  });
 
   // it('test error on update product', async () => { });
 

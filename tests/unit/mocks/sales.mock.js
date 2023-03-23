@@ -95,6 +95,20 @@ const resSaleMockByIdNonNormalized = [
   }
 ];
 
+const resUpdateSaleMock = {
+  saleId: 3,
+  itemsUpdated: [
+    {
+      productId: 1,
+      quantity: 1
+    },
+    {
+      productId: 2,
+      quantity: 5
+    }
+  ]
+}
+
 module.exports = {
   newSalesMock,
   resProductSaledMock,
@@ -104,4 +118,5 @@ module.exports = {
   resSaleMockByID,
   resAllSalesMockNonNormalized,
   resSaleMockByIdNonNormalized,
+  resUpdateSaleMock,
 };

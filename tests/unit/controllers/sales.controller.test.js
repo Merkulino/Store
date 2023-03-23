@@ -8,7 +8,8 @@ const { newSalesMock,
         resProductSaledMock,
         newInvalidSaleMock,
         resAllSalesMock,
-        resSaleMockByID } = require('../mocks/sales.mock');
+        resSaleMockByID, 
+        resUpdateSaleMock} = require('../mocks/sales.mock');
 chai.use(sinonChai);
 
 describe('Sale Controller Test', () => {
@@ -95,24 +96,45 @@ describe('Sale Controller Test', () => {
   });
   
   it('update an sale', async () => {
-    // const res = {};
-    // const req = {
-    //   params: {
-    //     id: 1,
-    //   },
-    //   body: {
-    //     name: 'Traje de crescimento',
-    //   },
-    // };
-    // res.status = sinon.stub().returns(res);
-    // res.json = sinon.stub().returns();
+    const res = {};
+    const req = {
+      params: {
+        id: 1,
+      },
+      body: {
+        name: newSalesMock,
+      },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-    // sinon.stub(productsService, 'updateProduct').resolves({ type: null, message: updateResponseMock });
+    sinon.stub(salesService, 'updateSale').resolves({ type: null, message: resUpdateSaleMock });
 
-    // await productsController.updateProduct(req, res);
+    await salesController.updateSale(req, res);
 
-    // expect(res.status).to.have.been.calledWith(200);
-    // expect(res.json).to.have.been.calledWith(updateResponseMock);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(resUpdateSaleMock);
+  });
+  
+  it('update an sale with error', async () => {
+    const res = {};
+    const req = {
+      params: {
+        id: 1,
+      },
+      body: {
+        name: newInvalidSaleMock,
+      },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(salesService, 'updateSale').resolves({ type: 'INVALID_INPUT', message: '"quantity" must be greater than or equal to 1' });
+
+    await salesController.updateSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(422);
+    expect(res.json).to.have.been.calledWith({ message: '"quantity" must be greater than or equal to 1' });
   });
 
   afterEach(() => {

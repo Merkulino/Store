@@ -11,9 +11,6 @@ const newSale = async (sales) => {
   if (notHaveProductOnDB.type) return notHaveProductOnDB;
     
   const res = await salesModel.newSale(sales);
-  if (res === undefined) {
-    return { type: 'DATABASE_ERROR', message: 'Erro ao adicionar venda ao banco' };
-  }
 
   return { type: null, message: res };
 };
@@ -38,7 +35,6 @@ const updateSale = async (id, sale) => {
   if (notHaveProductOnDB.type) return notHaveProductOnDB;
 
   const notHaveSaleOnDB = await validSaleOnDB(id);
-  console.log(notHaveSaleOnDB);
   if (notHaveSaleOnDB.type) return notHaveSaleOnDB;
 
   const saleUpdated = await salesModel.updateSale(id, sale);

@@ -39,7 +39,6 @@ describe('Sales Model Test', () => {
   it('return sale updated from db', async () => {
     sinon.stub(salesModel, 'getById').resolves(newSalesMock)
     sinon.stub(connection, 'execute').resolves(responseDBMock);
-    console.log(newSalesMock);
     // const result = await salesModel.updateSale(1, newSalesMock); -> sales.map not a func. Parece q stub n funciona
 
     // expect(result).to.deep.equal(resUpdateSaleMock);

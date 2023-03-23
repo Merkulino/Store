@@ -111,7 +111,7 @@ describe('Product Controller Test', async () => {
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
 
-    sinon.stub(productsService, 'updateProduct').resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+    sinon.stub(productsService, 'updateProduct').resolves({ type: 'NOT_FOUND', message: 'Product not found' });
 
     await productsController.updateProduct(req, res);
 
@@ -146,7 +146,7 @@ describe('Product Controller Test', async () => {
   //   res.status = sinon.stub().returns(res);
   //   res.json = sinon.stub().returns();
 
-    // sinon.stub(productsService, 'deleteProduct').resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+    // sinon.stub(productsService, 'deleteProduct').resolves({ type: 'NOT_FOUND', message: 'Product not found' });
 
     // await productsController.deleteProduct(req, res);
 

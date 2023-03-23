@@ -93,6 +93,24 @@ describe('Sale Controller Test', () => {
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Sale not found'});
   });
+  
+  it('update an sale', async () => {
+    // const res = {};
+    // const req = {
+    //   params: {
+    //     // id: 1
+    //   }
+    // };
+    // res.status = sinon.stub().returns(res);
+    // res.json = sinon.stub().returns();
+
+    // sinon.stub(salesService, 'getById').resolves({ type: 'NOT_FOUND', message: 'Sale not found' });
+
+    // await salesController.findSale(req, res);
+
+    // expect(res.status).to.have.been.calledWith(404);
+    // expect(res.json).to.have.been.calledWith({ message: 'Sale not found'});
+  });
 
   afterEach(() => {
     sinon.restore();

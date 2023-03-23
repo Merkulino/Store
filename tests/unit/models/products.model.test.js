@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const connection = require('../../../src/models/db.connection');
-const { productsMockData, responseDBMock } = require('../mocks/products.mock');
+const { productsMockData, responseDBMock, updateResponseMock } = require('../mocks/products.mock');
 
 describe('Products Model Test', () => {
   it('returns all products on database', async () => {
@@ -28,6 +28,16 @@ describe('Products Model Test', () => {
 
     expect(result).to.be.equal(2);
   });
+
+  it('return product updated from db', async () => {
+    // sinon.stub(connection, 'execute').resolves(updateResponseMock);
+
+    // const result = await productsModel.updateProduct(1, { name: 'Traje de crescimento' });
+
+    // expect(result).to.deep.equal(updateResponseMock);
+  });
+  
+  it('test error on update product', async () => {});
   
   afterEach(function () {
     sinon.restore();

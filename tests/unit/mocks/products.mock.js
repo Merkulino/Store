@@ -18,7 +18,13 @@ responseDBMock = [{
   warningStatus: 0
 }];
 
+updateResponseMock = {
+  id: 1,
+  name: "Traje de crescimento"
+};
+
 module.exports = {
   productsMockData,
   responseDBMock,
+  updateResponseMock,
 };

@@ -5,7 +5,7 @@ const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 const { productsService } = require("../../../src/services");
 const { productsController } = require('../../../src/controllers');
-const { productsMockData } = require('../mocks/products.mock');
+const { productsMockData, updateResponseMock } = require('../mocks/products.mock');
 
 describe('Product Controller Test', () => {
   it('return product obj from id', async () => {
@@ -80,6 +80,44 @@ describe('Product Controller Test', () => {
     // expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });
   });
 
+  it('update some product', async () => {
+    // const res = {};
+    // const req = {
+    //   params: {
+    //     id: 1,
+    //   },
+    //   body: {
+    //     name: 'Traje de crescimento',
+    //   },
+    // };
+    // res.status = sinon.stub().returns(res);
+    // res.json = sinon.stub().returns();
+
+    // sinon.stub(productsService, 'updateProduct').resolves({ type: null, message: updateResponseMock });
+
+    // await productsController.updateProduct(req, res);
+
+    // expect(res.status).to.have.been.calledWith(200);
+    // expect(res.json).to.have.been.calledWith(updateResponseMock);
+  });
+
+  it('returns 404 error when try to update an product that dont exist', async () => {
+    // const res = {};
+    // const req = {
+    //   params: {
+    //     id: 420,
+    //   },
+    // };
+    // res.status = sinon.stub().returns(res);
+    // res.json = sinon.stub().returns();
+
+    // sinon.stub(productsService, 'updateProduct').resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+
+    // await productsController.getById(req, res);
+
+    // expect(res.status).to.have.been.calledWith(404);
+    // expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
   
   afterEach(function () {
     sinon.restore();

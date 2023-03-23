@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
-const { productsMockData } = require('../mocks/products.mock');
+const { productsMockData, updateResponseMock } = require('../mocks/products.mock');
 
 describe('Product Service Test', () => {
   it('Get the right values from db', async () => {
@@ -42,6 +42,24 @@ describe('Product Service Test', () => {
 
     expect(result.type).to.be.null;
     expect(result.message).to.be.equal(mockObj);
+  });
+
+  it('return product updated from model', async () => {
+    // sinon.stub(productsModel, 'updateProduct').resolves(updateResponseMock);
+
+    // const result = await productsService.updateProduct(1, { name: "Traje de crescimento" });
+
+    // expect(result.type).to.be.null;
+    // expect(result.message).to.be.equal(updateResponseMock);
+  });
+
+  it('return a error when id is invalid', async () => {
+    // sinon.stub(productsModel, 'updateProduct').resolves(undefined);
+
+    // const result = await productsService.updateProduct(420, { name: "OBJETO DE ERRO" });
+
+    // expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
+    // expect(result.message).to.be.equal('Product not found');
   });
 
   afterEach(function () {

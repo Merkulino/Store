@@ -62,6 +62,24 @@ describe('Product Service Test', () => {
     expect(result.message).to.be.equal('Product not found');
   });
 
+  //  it('delete product', async () => {
+  //   sinon.stub(productsModel, 'delete').resolves('ok');
+
+  //   const result = await productsService.delete(1);
+
+  //   expect(result.type).to.be.null;
+  //   expect(result.message).to.be.equal('ok');
+  // });
+  
+  // it('delete sale', async () => {
+  //   sinon.stub(productsModel, 'delete').resolves('ok');
+
+  //   const result = await productsService.delete(123);
+
+  //   expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
+  //   expect(result.message).to.be.equal('Product not found');
+  // });
+
   afterEach(function () {
     sinon.restore();
   });

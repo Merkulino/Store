@@ -113,11 +113,46 @@ describe('Product Controller Test', () => {
 
     sinon.stub(productsService, 'updateProduct').resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
 
-    await productsController.getById(req, res);
+    await productsController.updateProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
+
+  // it('delete an product', async () => {
+  //   const res = {};
+  //   const req = {
+  //     params: {
+  //       id: 2,
+  //     },
+  //   };
+  //   res.status = sinon.stub().returns(res);
+  //   res.json = sinon.stub().returns();
+
+  //   sinon.stub(productsService, 'delete').resolves('ok');
+
+  //   await productsController.delete(req, res);
+
+  //   expect(res.status).to.have.been.calledWith(204);
+  // });
+
+  // it('returns 404 error when try to delete an product that dont exist', async () => {
+  //   const res = {};
+  //   const req = {
+  //     params: {
+  //       id: 666,
+  //     },
+  //   };
+  //   res.status = sinon.stub().returns(res);
+  //   res.json = sinon.stub().returns();
+
+  //   sinon.stub(productsService, 'delete').resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
+
+  //   await productsController.delete(req, res);
+
+  //   expect(res.status).to.have.been.calledWith(404);
+  //   expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  // });
   
   afterEach(function () {
     sinon.restore();

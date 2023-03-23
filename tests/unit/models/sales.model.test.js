@@ -45,7 +45,13 @@ describe('Sales Model Test', () => {
     // expect(result).to.deep.equal(resUpdateSaleMock);
   });
 
-  // it('test error on update product', async () => { });
+  // it('deelete an sale from db', async () => {
+  //   sinon.stub(connection, 'execute').resolves(responseDBMock);
+
+  //   const result = await salesModel.delete(producto);
+
+  //   expect(result).to.be.equal(seila);
+  // });
 
   afterEach(() => {
     sinon.restore();

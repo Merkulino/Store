@@ -137,6 +137,41 @@ describe('Sale Controller Test', () => {
     expect(res.json).to.have.been.calledWith({ message: '"quantity" must be greater than or equal to 1' });
   });
 
+  // it('delete an sale', async () => {
+  //   const res = {};
+  //   const req = {
+  //     params: {
+  //       id: 1,
+  //     },
+  //   };
+  //   res.status = sinon.stub().returns(res);
+  //   res.json = sinon.stub().returns();
+
+  //   sinon.stub(salesService, 'delete').resolves('ok');
+
+  //   await salesController.delete(req, res);
+
+  //   expect(res.status).to.have.been.calledWith(204);
+  // });
+
+  // it('return a error when sale id not exist on db', async () => {
+  //   const res = {};
+  //   const req = {
+  //     params: {
+  //       id: 666
+  //     }
+  //   };
+  //   res.status = sinon.stub().returns(res);
+  //   res.json = sinon.stub().returns();
+
+  //   sinon.stub(salesService, 'delete').resolves({ type: 'NOT_FOUND', message: 'Sale not found' });
+
+  //   await salesController.delete(req, res);
+
+  //   expect(res.status).to.have.been.calledWith(404);
+  //   expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
+  // });
+
   afterEach(() => {
     sinon.restore();
   });

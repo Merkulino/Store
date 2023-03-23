@@ -67,9 +67,16 @@ const updateSale = async (id, sale) => {
   return { saleId: id, itemsUpdated: sale };
 };
 
+const deleteSale = async (id) => {
+  await db.execute('DELETE FROM sales WHERE id = ?;', [id]);
+  await db.execute('DELETE FROM sales_products WHERE sale_id = ?;', [id]);
+  return 'ok';
+};
+
 module.exports = {
   newSale,
   getAll,
   getById,
   updateSale,
+  deleteSale,
 };

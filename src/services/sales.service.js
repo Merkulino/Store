@@ -42,9 +42,19 @@ const updateSale = async (id, sale) => {
   return { type: null, message: saleUpdated };
 };
 
+const deleteSale = async (id) => {
+  const notHaveSaleOnDB = await validSaleOnDB(id);
+  if (notHaveSaleOnDB.type) return notHaveSaleOnDB;
+  
+  const saleDeleted = await salesModel.deleteSale(id);
+  if (!saleDeleted) return { type: 'SERVER_ERROR', message: saleDeleted };
+  return { type: null, message: null };
+};
+
 module.exports = {
   newSale,
   getAll,
   getById,
   updateSale,
+  deleteSale,
 };

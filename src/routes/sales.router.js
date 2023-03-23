@@ -20,4 +20,7 @@ router.put('/:id',
   validation.newSale,
   salesController.updateSale);
 
+router.delete('/:id',
+  salesController.deleteSale);
+
 module.exports = router;

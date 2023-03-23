@@ -30,11 +30,13 @@ describe('Products Model Test', () => {
   });
 
   it('return product updated from db', async () => {
-    // sinon.stub(connection, 'execute').resolves(updateResponseMock);
+    const nameMock = { name: 'Traje de crescimento' };
 
-    // const result = await productsModel.updateProduct(1, { name: 'Traje de crescimento' });
-
-    // expect(result).to.deep.equal(updateResponseMock);
+    sinon.stub(connection, 'execute').onFirstCall().resolves(responseDBMock)
+      .onSecondCall().resolves([[nameMock]]);
+    
+    const result = await productsModel.updateProduct(1, nameMock);
+    expect(result).to.deep.equal(updateResponseMock);
   });
   
   it('test error on update product', async () => {});

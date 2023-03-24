@@ -130,5 +130,25 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "d9f7de8a-f378-445a-a977-8efd5da31756",
+    "colId": "history",
+    "containerId": "",
+    "name": "searchTerm",
+    "url": "localhost:3001/products/search?q=Thor",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-03-24T15:19:01.432Z",
+    "modified": "2023-03-24T15:45:50.344Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "Thor",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]

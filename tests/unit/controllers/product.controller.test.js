@@ -60,26 +60,6 @@ describe('Product Controller Test', async () => {
     expect(res.json).to.have.been.calledWith(productsMockData[1]);
   });
   
-  it('validate the field name when add new product', async () => {
-    const res = {};
-    const req = {
-      body: {
-        name: 'TR',
-      },
-    };
-    res.status = sinon.stub().returns(res);
-    res.json = sinon.stub().returns();
-
-    sinon.stub(productsService, 'newProduct').resolves({ type: null, message: productsMockData[1] });
-
-    await productsController.newProduct(req, res);
-    
-    // Não sei como testa a validação dos middlewares
-
-    // expect(res.status).to.have.been.calledWith();
-    // expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });
-  });
-
   it('update some product', async () => {
     const res = {};
     const req = {

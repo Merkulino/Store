@@ -7,7 +7,7 @@ const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
 const { productsMockData, updateResponseMock } = require('../mocks/products.mock');
 
-describe('Product Service Test', () => { // Refatorar testes que contenham validações do banco, organizar como fiz no delete
+describe('Product Service Test', () => {
   it('Get the right values from db', async () => {
     sinon.stub(productsModel, 'getAll').resolves(productsMockData);
 
@@ -48,18 +48,20 @@ describe('Product Service Test', () => { // Refatorar testes que contenham valid
   });
 
   it('return product updated from model', async () => {
+    sinon.stub(productsModel, 'getById').resolves({ type: null });
     sinon.stub(productsModel, 'updateProduct').resolves(updateResponseMock);
 
-    const result = await productsService.updateProduct(1, { name: "Traje de crescimento" });
+    const result = await productsService.updateProduct(999, { name: "Traje de crescimento" });
 
     expect(result.type).to.be.null;
     expect(result.message).to.be.equal(updateResponseMock);
   });
 
   it('return a error when id is invalid', async () => {
-    sinon.stub(productsModel, 'updateProduct').resolves(undefined);
+    sinon.stub(productsModel, 'getById').resolves(undefined);
+    sinon.stub(productsModel, 'updateProduct').resolves(updateResponseMock);
 
-    const result = await productsService.updateProduct(420, { name: "OBJETO DE ERRO" });
+    const result = await productsService.updateProduct(1, { name: "OBJETO DE ERRO" });
 
     expect(result.type).to.be.equal('NOT_FOUND');
     expect(result.message).to.be.equal('Product not found');
@@ -76,7 +78,6 @@ describe('Product Service Test', () => { // Refatorar testes que contenham valid
   });
   
   it('delete product', async () => {
-    // validations.verifyProductOnDB = sinon.stub().resolves({ type: 'NOT_FOUND', message: 'Product not found' }); // Spy de validações não funciona, falso positivo.
     sinon.stub(productsModel, 'deleteProduct').resolves('ok');
     sinon.stub(productsModel, 'getById').resolves(undefined); // Assim funciona
 

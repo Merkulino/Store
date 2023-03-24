@@ -154,6 +154,24 @@ describe('Product Controller Test', async () => {
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
   
+  it('delete an product', async () => {
+    const res = {};
+    const req = {
+      query: {
+        q: 'Thor',
+      },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'searchProduct').resolves({ type: null, message: [productsMockData[0]]});
+
+    await productsController.searchProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith([productsMockData[0]]);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

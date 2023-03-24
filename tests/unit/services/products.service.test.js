@@ -86,6 +86,15 @@ describe('Product Service Test', () => { // Refatorar testes que contenham valid
     expect(result.message).to.be.equal('Product not found');
   });
 
+  it('search a product from a term', async () => {
+    sinon.stub(productsModel, 'searchProduct').resolves(productsMockData[0]);
+
+    const result = await productsService.searchProduct('Thor');
+
+    expect(result.type).to.be.null;
+    expect(result.message).to.be.equal(productsMockData[0]);
+  })
+
   afterEach(function () {
     sinon.restore();
   });

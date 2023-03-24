@@ -47,6 +47,14 @@ describe('Products Model Test', () => {
     expect(result).to.be.equal('ok');
   });
   
+  it('deelete an product from db', async () => {
+    sinon.stub(connection, 'execute').resolves([productsMockData[0]]);
+
+    const result = await productsModel.searchProduct('Thor');
+
+    expect(result).to.deep.equal([productsMockData[0]]);
+  });
+  
   afterEach(function () {
     sinon.restore();
   });

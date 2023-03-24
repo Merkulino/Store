@@ -39,13 +39,13 @@ describe('Products Model Test', () => {
     expect(result).to.deep.equal(updateResponseMock);
   });
   
-  // it('deelete an product from db', async () => {
-  //   sinon.stub(connection, 'execute').resolves(responseDBMock);
+  it('deelete an product from db', async () => {
+    sinon.stub(connection, 'execute').resolves(responseDBMock);
 
-  //   const result = await productsModel.delete(producto);
+    const result = await productsModel.deleteProduct(999);
 
-  //   expect(result).to.be.equal(seila);
-  // });
+    expect(result).to.be.equal('ok');
+  });
   
   afterEach(function () {
     sinon.restore();

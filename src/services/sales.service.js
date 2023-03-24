@@ -48,7 +48,7 @@ const deleteSale = async (id) => {
   
   const saleDeleted = await salesModel.deleteSale(id);
   if (!saleDeleted) return { type: 'SERVER_ERROR', message: saleDeleted };
-  return { type: null, message: null };
+  return { type: null, message: 'ok' };
 };
 
 module.exports = {

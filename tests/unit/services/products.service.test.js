@@ -1,10 +1,13 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
+chai.use(sinonChai);
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
 const { productsMockData, updateResponseMock } = require('../mocks/products.mock');
 
-describe('Product Service Test', () => {
+describe('Product Service Test', () => { // Refatorar testes que contenham validações do banco, organizar como fiz no delete
   it('Get the right values from db', async () => {
     sinon.stub(productsModel, 'getAll').resolves(productsMockData);
 
@@ -62,23 +65,26 @@ describe('Product Service Test', () => {
     expect(result.message).to.be.equal('Product not found');
   });
 
-  //  it('delete product', async () => {
-  //   sinon.stub(productsModel, 'delete').resolves('ok');
+   it('delete product', async () => {
+     sinon.stub(productsModel, 'deleteProduct').resolves('ok');
+     sinon.stub(productsModel, 'getById').resolves([{ status:'ok' }]);
 
-  //   const result = await productsService.delete(1);
+    const result = await productsService.deleteProduct(999);
 
-  //   expect(result.type).to.be.null;
-  //   expect(result.message).to.be.equal('ok');
-  // });
+    expect(result.type).to.be.null;
+    expect(result.message).to.be.equal('ok');
+  });
   
-  // it('delete sale', async () => {
-  //   sinon.stub(productsModel, 'delete').resolves('ok');
+  it('delete product', async () => {
+    // validations.verifyProductOnDB = sinon.stub().resolves({ type: 'NOT_FOUND', message: 'Product not found' }); // Spy de validações não funciona, falso positivo.
+    sinon.stub(productsModel, 'deleteProduct').resolves('ok');
+    sinon.stub(productsModel, 'getById').resolves(undefined); // Assim funciona
 
-  //   const result = await productsService.delete(123);
+    const result = await productsService.deleteProduct(1);
 
-  //   expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
-  //   expect(result.message).to.be.equal('Product not found');
-  // });
+    expect(result.type).to.be.equal('NOT_FOUND');
+    expect(result.message).to.be.equal('Product not found');
+  });
 
   afterEach(function () {
     sinon.restore();

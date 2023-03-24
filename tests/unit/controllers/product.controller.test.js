@@ -119,40 +119,40 @@ describe('Product Controller Test', async () => {
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
 
-  // it('delete an product', async () => {
-  //   const res = {};
-  //   const req = {
-  //     params: {
-  //       id: 2,
-  //     },
-  //   };
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+  it('delete an product', async () => {
+    const res = {};
+    const req = {
+      params: {
+        id: 2,
+      },
+    };
+    res.status = sinon.stub().returns(res);
+    res.send = sinon.stub().returns();
 
-    // sinon.stub(productsService, 'deleteProduct').resolves('ok');
+    sinon.stub(productsService, 'deleteProduct').resolves('ok');
 
-    // await productsController.deleteProduct(req, res);
+    await productsController.deleteProduct(req, res);
 
-  //   expect(res.status).to.have.been.calledWith(204);
-  // });
+    expect(res.status).to.have.been.calledWith(204);
+  });
 
-  // it('returns 404 error when try to delete an product that dont exist', async () => {
-  //   const res = {};
-  //   const req = {
-  //     params: {
-  //       id: 666,
-  //     },
-  //   };
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
+  it('returns 404 error when try to delete an product that dont exist', async () => {
+    const res = {};
+    const req = {
+      params: {
+        id: 666,
+      },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
 
-    // sinon.stub(productsService, 'deleteProduct').resolves({ type: 'NOT_FOUND', message: 'Product not found' });
+    sinon.stub(productsService, 'deleteProduct').resolves({ type: 'NOT_FOUND', message: 'Product not found' });
 
-    // await productsController.deleteProduct(req, res);
+    await productsController.deleteProduct(req, res);
 
-  //   expect(res.status).to.have.been.calledWith(404);
-  //   expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-  // });
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
   
   afterEach(function () {
     sinon.restore();

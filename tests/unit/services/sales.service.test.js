@@ -8,7 +8,7 @@ const { salesService } = require('../../../src/services');
 const { newSalesMock, resProductSaledMock, resAllSalesMock, resSaleMockByID, resUpdateSaleMock } = require('../mocks/sales.mock');
 const validations = require('../../../src/validations/validate.products');
 
-describe('Sales Service Test', () => {
+describe('Sales Service Test', () => { // Refatorar testes que contenham validações do banco, organizar como fiz no delete
   it('add new sale or sales', async () => {
     sinon.stub(salesModel, 'newSale').resolves(resProductSaledMock);
 
@@ -66,23 +66,25 @@ describe('Sales Service Test', () => {
   //   expect(result.message).to.be.equal('Product not found');
   // });
 
-  // it('delete sale', async () => {
-    // sinon.stub(salesModel, 'deleteProduct').resolves('ok');
+  it('delete sale', async () => {
+    sinon.stub(salesModel, 'deleteSale').resolves('ok');
+    sinon.stub(salesModel, 'getById').resolves([{ status:'ok' }]);
 
-    // const result = await salesService.deleteProduct(1);
+    const result = await salesService.deleteSale(999);
 
-  //   expect(result.type).to.be.null;
-  //   expect(result.message).to.be.equal('ok');
-  // });
+    expect(result.type).to.be.null;
+    expect(result.message).to.be.equal('ok');
+  });
   
-  // it('delete sale', async () => {
-    // sinon.stub(salesModel, 'deleteProduct').resolves('ok');
+  it('delete sale', async () => {
+    sinon.stub(salesModel, 'deleteSale').resolves('ok');
+    sinon.stub(salesModel, 'getById').resolves(undefined);
 
-    // const result = await salesService.deleteProduct(123);
+    const result = await salesService.deleteSale(1);
 
-  //   expect(result.type).to.be.equal('PRODUCT_NOT_FOUND');
-  //   expect(result.message).to.be.equal('Product not found');
-  // });
+    expect(result.type).to.be.equal('NOT_FOUND');
+    expect(result.message).to.be.equal('Sale not found');
+  });
 
   afterEach(() => {
     sinon.restore();

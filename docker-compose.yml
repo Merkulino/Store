@@ -25,8 +25,8 @@ services:
       # Monta o diretório atual, com todos os dados do projeto, 
       # dentro do diretório /app
       - ./src/:/app/src
-      - ./tests/:/app/tests
-      - ./__tests__/:/app/__tests__
+      - ./tests/:/app/tests/unit/**/*.test.js --exit
+      # - ./__tests__/:/app/__tests__
     # Lista de serviços do qual este serviço depende
     depends_on:
       # Precisa do banco funcionando antes de subir o node

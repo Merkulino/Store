@@ -9,6 +9,14 @@ const validateSaleQuantity = (sales) => {
   return { type: null, message: '' };
 };
 
+const validateProductInputs = (product) => {
+  const { error } = schema.validateNewProduct.validate(product);
+  if (error) {
+    return { type: 'INVALID_INPUT', message: error.message };
+  }
+  return { type: null, message: '' };
+};
+
 const verifyProductOnDB = async (productId) => {
   const product = await productsModel.getById(productId);
   if (!product) return { type: 'NOT_FOUND', message: 'Product not found' };
@@ -38,4 +46,5 @@ module.exports = {
   validateProducts,
   verifyProductOnDB,
   validSaleOnDB,
+  validateProductInputs,
 };

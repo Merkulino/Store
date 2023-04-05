@@ -1,5 +1,3 @@
-const schema = require('../validations/joi.schemas');
-
 const validProductName = (req, res, next) => {
   const { name } = req.body;
   if (!name) next({ status: 400, message: '"name" is required' });
@@ -9,10 +7,6 @@ const validProductName = (req, res, next) => {
 const newProduct = (req, res, next) => {
   const product = req.body;
   if (!product.name) return res.status(400).json({ message: '"name" is required' });
-  const { error } = schema.validateNewProduct.validate(product); // Refactor colocar essa validação na service e usar a funcão para validar campo name
-  if (error) {
-    return next({ status: 422, message: error.message });
-  }
   next();
 };
 

@@ -48,4 +48,4 @@ const seedDatabase = async () => {
   }
 };
 
-module.exports = { ProductModel, seedDatabase };
+module.exports = { ProductModel, SalesModel, seedDatabase };

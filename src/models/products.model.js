@@ -1,47 +1,39 @@
-const db = require('./db.connection');
+const { ProductModel: db } = require('./productsODM');
 
-const getAll = async () => {
-  const [products] = await db.execute('SELECT * FROM products');
-  return products;
-};
+const getAll = async () => db.find();
 
 const getById = async (id) => {
-  const [[products]] = await db.execute(`
-  SELECT * FROM products
-  WHERE id = ?
-  ORDER BY id ASC`, [id]);
-
-  return products;
+  try {
+    const response = await db.findById(id);
+    return response;
+  } catch (error) {
+    return undefined;
+  }
 };
 
 const newProduct = async (productData) => {
-  const [{ insertId }] = await db.execute(`
-  INSERT INTO products (name) VALUES (?)`, [productData]);
-
-  return insertId;
+  try {
+    const response = await db.create({ name: productData });
+    return response;
+  } catch (error) {
+    return undefined;
+  }
 };
 
-const updateProduct = async (id, { name }) => {
-  await db.execute(`
-    UPDATE products
-    SET name = ?
-    WHERE id = ?`, [name, id]);
-  const [[{ name: nome }]] = await db.execute(`
-  SELECT name FROM products WHERE id = ?`, [id]);
-  return { id, name: nome };
-};
+const updateProduct = async (id, { name }) => db.findOneAndUpdate({ _id: id }, { name })
+  .then(() => ({ id, name }))
+  .catch((error) => error);
 
 const deleteProduct = async (id) => {
-  const [response] = await db.execute('DELETE FROM products WHERE id = ?', [id]);
-  if (!response.affectedRows > 0) return undefined;
-  return 'ok';
+  try {
+    const response = await db.findByIdAndRemove({ _id: id });
+    return response;
+  } catch (error) {
+    return undefined;
+  }
 };
 
-const searchProduct = async (term) => {
-  const sqlQuery = `SELECT * FROM products WHERE name LIKE '%${term}%'`;
-  const [response] = await db.query(sqlQuery);
-  return response;
-};
+const searchProduct = async (term) => db.find({ name: { $regex: term, $options: 'i' } });
 
 module.exports = {
   getAll,

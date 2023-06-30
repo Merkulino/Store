@@ -17,10 +17,9 @@ const newProduct = async (productData) => {
   const error = validateProductInputs(productData);
   if (error.type) return error;
 
-  const productID = await productsModel.newProduct(productData);
-  const productObj = await productsModel.getById(productID);
-
-  return { type: null, message: productObj };
+  const product = await productsModel.newProduct(productData);
+  if (!product) return { type: 'CONFLICT', message: 'Was not possible add new product' };
+  return { type: null, message: product };
 };
 
 const updateProduct = async (id, product) => {
@@ -41,6 +40,7 @@ const deleteProduct = async (id) => {
 
 const searchProduct = async (term) => {
   const objSearch = await productsModel.searchProduct(term);
+  if (!objSearch) return { type: 'NOT_FOUND', message: 'Search not found' };
   return { type: null, message: objSearch };
 };
 

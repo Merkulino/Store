@@ -1,76 +1,43 @@
 // const { snakefy } = require('snakelize');
-const db = require('./db.connection');
+const { SalesModel: db, ProductModel: dbProd } = require('./databaseODM');
 
 const newSale = async (sale) => {
-  const [{ insertId }] = await db.execute('INSERT INTO sales (date) VALUES (NOW())');
-  try {
+  try { // Not working x.x
     const newSalesProducts = sale.map(async ({ productId, quantity }) => {
-      await db.execute(
-        `INSERT INTO sales_products (sale_id, product_id, quantity) VALUES
-        (?, ?, ?)`,
-        [insertId, productId, quantity],
-      );
+      const currProduct = await dbProd.findOne({ _id: productId });
+      const name = currProduct.name.toString();
+      await db.create({ productName: name, quantity });
     });
 
     await Promise.all(newSalesProducts);
   } catch (e) {
     return undefined;
   }
-  return { id: insertId, itemsSold: sale };
+  return { itemsSold: sale };
 };
 
-const getAll = async () => {
-  const [sales] = await db.execute(`
-  SELECT sale_id, date, product_id,quantity
-  FROM sales AS s
-  INNER JOIN sales_products AS sp 
-  ON s.id = sp.sale_id
-  ORDER BY sale_id ASC, product_id;`);
-
-  const salesNormalized = sales.map((sale) => ({ // Refactor -> Camelize
-    saleId: sale.sale_id,
-    date: sale.date,
-    productId: sale.product_id,
-    quantity: sale.quantity,
-  }));
-  
-  return salesNormalized;
-};
+const getAll = async () => db.find();
 
 const getById = async (id) => {
-  const [sales] = await db.execute(`
-  SELECT date, product_id, quantity
-  FROM sales as s
-  INNER JOIN sales_products as sp 
-  ON s.id = sp.sale_id
-  WHERE sale_id = ?
-  ORDER BY sale_id ASC, product_id;`, [id]);
-
-  const salesNormalized = sales.map((sale) => ({ // Refactor -> Camelize
-    date: sale.date,
-    productId: sale.product_id,
-    quantity: sale.quantity,
-  }));
-
-  return salesNormalized;
+  try {
+    const response = await db.findById(id);
+    return response;
+  } catch (error) {
+    return undefined;
+  }
 };
 
-const updateSale = async (id, sale) => {
-  const currentSale = await getById(id);
-  const updateSales = sale.map(async ({ productId, quantity }, index) => {
-    await db.execute(`
-    UPDATE sales_products
-    SET product_id = ?, quantity = ?
-    WHERE sale_id = ? AND quantity = ?;`, [productId, quantity, id, currentSale[index].quantity]);
-  });
-  await Promise.all(updateSales);
-  return { saleId: id, itemsUpdated: sale };
-};
+const updateSale = async (id, { quantity }) => db.findOneAndUpdate({ _id: id }, { quantity })
+  .then(() => ({ saleId: id, itemsUpdated: quantity }))
+  .catch((error) => error);
 
 const deleteSale = async (id) => {
-  await db.execute('DELETE FROM sales WHERE id = ?;', [id]);
-  await db.execute('DELETE FROM sales_products WHERE sale_id = ?;', [id]);
-  return 'ok';
+  try {
+    await db.findByIdAndRemove({ _id: id });
+    return 'ok';
+  } catch (error) {
+    return undefined;
+  }
 };
 
 module.exports = {

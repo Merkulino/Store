@@ -37,7 +37,7 @@ const validateProducts = async (sales) => {
 
 const validSaleOnDB = async (saleID) => {
   const hasSale = await salesModel.getById(saleID); 
-  if (!hasSale || !hasSale.length) return { type: 'NOT_FOUND', message: 'Sale not found' };
+  if (!hasSale) return { type: 'NOT_FOUND', message: 'Sale not found' };
   return { type: null };
 };
 

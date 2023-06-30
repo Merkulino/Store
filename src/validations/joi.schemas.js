@@ -7,7 +7,7 @@ const validateNewProduct = Joi.string().min(5).required().label('name')
 });
 
 const validNewSale = Joi.array().items(Joi.object({
-  productId: Joi.number().required(),
+  productId: Joi.string().required(),
   quantity: Joi.number().min(1).required(),
 }));
 

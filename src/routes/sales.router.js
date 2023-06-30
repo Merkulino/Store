@@ -17,7 +17,7 @@ router.post('/',
   salesController.newSale);
 
 router.put('/:id',
-  validation.newSale,
+  // validation.newSale,
   salesController.updateSale);
 
 router.delete('/:id',

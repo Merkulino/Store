@@ -26,8 +26,8 @@ const updateProduct = async (id, { name }) => db.findOneAndUpdate({ _id: id }, {
 
 const deleteProduct = async (id) => {
   try {
-    const response = await db.findByIdAndRemove({ _id: id });
-    return response;
+    await db.findByIdAndRemove({ _id: id });
+    return 'ok';
   } catch (error) {
     return undefined;
   }

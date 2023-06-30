@@ -23,8 +23,14 @@ updateResponseMock = {
   name: "Traje de crescimento"
 };
 
+newProductResponse = {
+  id: 1,
+  name: "newProduct"
+};
+
 module.exports = {
   productsMockData,
   responseDBMock,
   updateResponseMock,
+  newProductResponse,
 };

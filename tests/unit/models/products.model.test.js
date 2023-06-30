@@ -1,10 +1,10 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
-const { ProductModel } = require('../../../src/models/productsODM');
+const { ProductModel } = require('../../../src/models/databaseODM');
 const { productsMockData, responseDBMock, updateResponseMock, newProductResponse } = require('../mocks/products.mock');
 
-describe.only('Products Model Test', () => {
+describe('Products Model Test', () => {
   it('returns all products on database', async () => {
     sinon.stub(ProductModel, 'find').resolves(productsMockData);
     

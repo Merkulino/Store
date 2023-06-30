@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const chai = require('chai');
 const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
-const connection = require('../../../src/models/db.connection');
+const {SalesModel} = require('../../../src/models/databaseODM');
 const {
   resProductSaledMock,
   newSalesMock,
@@ -15,7 +15,7 @@ const {
 
 describe('Sales Model Test', () => {
   it('add new sale or sales', async () => {
-    sinon.stub(connection, 'execute').onFirstCall().resolves(responseDBMock)
+    sinon.stub(SalesModel, 'create').onFirstCall().resolves(responseDBMock)
       .onSecondCall().resolves(responseDBMock);
     const result = await salesModel.newSale(newSalesMock);
 
@@ -23,21 +23,21 @@ describe('Sales Model Test', () => {
   });
   
   it('get all sales from db', async () => {
-    sinon.stub(connection, 'execute').resolves([resAllSalesMockNonNormalized]);
+    sinon.stub(SalesModel, 'find').resolves([resAllSalesMockNonNormalized]);
     const result = await salesModel.getAll();
 
     expect(result).to.deep.equal(resAllSalesMock);
   });
   
   it('get sales from db with id', async () => {
-    sinon.stub(connection, 'execute').resolves([resSaleMockByIdNonNormalized]);
+    sinon.stub(SalesModel, 'findById').resolves([resSaleMockByIdNonNormalized]);
     const result = await salesModel.getById(1);
 
     expect(result).to.deep.equal(resSaleMockByID);
   });
 
   it('return sale updated from db', async () => {
-    sinon.stub(connection, 'execute').onFirstCall().resolves([resSaleMockByIdNonNormalized])
+    sinon.stub(SalesModel, 'findOneAndUpdate').onFirstCall().resolves([resSaleMockByIdNonNormalized])
       .onSecondCall().resolves(responseDBMock);
     const result = await salesModel.updateSale(3, newSalesMock);
 
@@ -45,7 +45,7 @@ describe('Sales Model Test', () => {
   });
 
   it('deelete an sale from db', async () => {
-    sinon.stub(connection, 'execute').onFirstCall().resolves(responseDBMock)
+    sinon.stub(SalesModel, 'findOneAndRemove').onFirstCall().resolves(responseDBMock)
       .onSecondCall().resolves(responseDBMock);
 
     const result = await salesModel.deleteSale(999);

@@ -1,5 +1,5 @@
 const app = require('./app');
-const { seedDatabase } = require('./models/productsODM');
+const { seedDatabase } = require('./models/databaseODM');
 const connectDB = require('./models/db.connection');
 
 connectDB.then(() => {

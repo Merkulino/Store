@@ -23,16 +23,17 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const sale = await salesModel.getById(id);
-  if (!sale || !sale.length) return { type: 'NOT_FOUND', message: 'Sale not found' };
+  console.log(sale);
+  if (!sale) return { type: 'NOT_FOUND', message: 'Sale not found' };
   return { type: null, message: sale };
 };
 
 const updateSale = async (id, sale) => {
-  const error = validateSaleQuantity(sale);
-  if (error.type) return error;
+  // const error = validateSaleQuantity(sale);
+  // if (error.type) return error;
 
-  const notHaveProductOnDB = await validateProducts(sale);
-  if (notHaveProductOnDB.type) return notHaveProductOnDB;
+  // const notHaveProductOnDB = await validateProducts(sale);
+  // if (notHaveProductOnDB.type) return notHaveProductOnDB;
 
   const notHaveSaleOnDB = await validSaleOnDB(id);
   if (notHaveSaleOnDB.type) return notHaveSaleOnDB;

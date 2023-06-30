@@ -1,4 +1,4 @@
-const { ProductModel: db } = require('./productsODM');
+const { ProductModel: db } = require('./databaseODM');
 
 const getAll = async () => db.find();
 
